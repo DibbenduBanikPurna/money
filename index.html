@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--bootstrap-cdn-link-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Money</title>
+</head>
+
+<body>
+    <header>
+        <h1 class="text-center text-primary">Money Master</h1>
+    </header>
+    <main class="container">
+        <div class="row">
+            <div class="col-md-6 ">
+                <img class="img-fluid" src="./money.jpg">
+
+            </div>
+            <div class="col-md-3 m-auto ">
+
+                <h1>Income</h1>
+                <label>Income:</label>
+                <input id="income" type="number">
+                <br />
+                <h1 class="mt-3">Expense:</h1>
+                <label class="mt-4">Food:</label>
+                <input id="food" type="number">
+                <br />
+                <label class="mt-4">Rent:</label>
+                <input id="rent" type="number">
+                <br />
+                <label class="mt-4 ">Cloth:</label>
+                <input id="cloth" type="number">
+                <br />
+                <button id="calculation" class="btn btn-primary form-control mt-2">Calculate</button>
+                <div class="mt-3">
+                    <h2>Total Expenses:<span id="total-expense"></span></h2>
+                    <h2>Balance:<span id="total-balance"></span></h2>
+                </div>
+                <div class="mt-3">
+                    <label>Save</label>
+                    <input id="save" type="number">
+                    <span>%</span>
+                    <button id="save-btn">Save</button>
+                    <h6>Saving Amount: <span id="saving-amount"></span> </h6>
+                    <h6>Remaining Balance: <span id="remaining-account"></span> </h6>
+
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let Income = document.getElementById("income");
+        let submit = document.getElementById("calculation");
+        let food = document.getElementById("food");
+        let rent = document.getElementById("rent");
+        let cloth = document.getElementById("cloth");
+        let total_expense = document.getElementById("total-expense");
+        let balance = document.getElementById("total-balance");
+        let save = document.getElementById("save");
+        let save_btn = document.getElementById("save-btn");
+
+
+        const saveAmount = () => {
+            save_btn.addEventListener("click", () => {
+                total = Income.value;
+                total_income = parseInt(total);
+                let save_amount = parseInt(save.value)
+                total_balance = total_income - expense();
+                safe = (total_income * save_amount) / 100;
+                remain = total_balance - safe;
+                document.getElementById("saving-amount").innerHTML = safe;
+                document.getElementById("remaining-account").innerHTML = remain;
+            })
+        }
+        saveAmount()
+
+        const cal = () => {
+            submit.addEventListener("click", () => {
+                // console.log("Clicked")
+                total = Income.value;
+                total_income = parseInt(total);
+                console.log(total_income)
+                console.log(total_income - expense());
+                if (total_income > expense()) {
+                    total_balance = total_income - expense();
+                    balance.innerHTML = total_balance;
+                    total_expense.innerText = expense();
+                }
+                else {
+                    alert("wrong")
+                }
+
+            })
+
+        }
+        cal()
+
+        const expense = () => {
+            let Food = parseInt(food.value);
+            let Rent = parseInt(rent.value);
+            let Cloth = parseInt(cloth.value);
+            let Total_cost = Food + Rent + Cloth;
+            return Total_cost;
+        }
+    </script>
+</body>
+
+</html>
